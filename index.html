@@ -18,10 +18,37 @@
   </head>
   <body>
     <header></header>
-    <section class="main"></section>
+    <section class="main">
+      <section class="add-book">
+        <h1>Add new book</h1>
+        <div class="input-wrapper title">
+          <span class="material-symbols-outlined">title</span>
+          <input type="text" id="title" name="title" placeholder="Title" />
+        </div>
+        <div class="input-wrapper author">
+          <span class="material-symbols-outlined"> person </span>
+          <input type="text" id="author" name="author" placeholder="Author" />
+        </div>
+        <div class="input-wrapper pages">
+          <span class="material-symbols-outlined"> auto_stories </span>
+          <input type="text" id="pages" name="pages" placeholder="Pages" />
+        </div>
+        <div class="input-wrapper image-url">
+          <span class="material-symbols-outlined"> add_a_photo </span>
+          <input
+            type="text"
+            id="image-url"
+            name="image-url"
+            placeholder="Image Url"
+          />
+        </div>
+        <div class="add-book-bto-wrapper">
+          <button class="add-book-bto">Add Book</button>
+        </div>
+      </section>
+    </section>
     <footer>
       <nav>
-        <span class="material-symbols-outlined"> home </span>
         <span class="material-symbols-outlined"> menu_book </span>
         <span class="material-symbols-outlined active"> add_box </span>
         <span class="material-symbols-outlined"> more_horiz </span>

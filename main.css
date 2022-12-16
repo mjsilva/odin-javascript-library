@@ -1,8 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Montserrat:wght@400;700&display=swap");
+
 :root {
   --c-light-brown: #f7f3ee;
   --c-medium-brown: #daaa63;
   --c-dark-brown: #2c1810;
   --c-white: #fff;
+  --c-grey: #fff;
   --c-off-white: rgba(255, 255, 255, 0.62);
 }
 
@@ -10,17 +13,23 @@
   font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 48;
 }
 
+h1 {
+  font-family: "Libre Caslon Text", serif;
+  font-weight: normal;
+}
+
 body {
   background-color: var(--c-medium-brown);
   display: grid;
   grid-template-rows: 50px 1fr 80px;
+  font-family: "Montserrat", sans-serif;
 }
 
 header {
   background-color: var(--c-light-brown);
 }
 
-section {
+body > section {
   background-color: var(--c-light-brown);
   border-radius: 0 0 50px 50px;
   box-shadow: 0 1em 1em -1em rgba(0, 0, 0, 0.25);
@@ -45,3 +54,46 @@ footer nav .material-symbols-outlined:hover {
   transform: scale(1.2);
 }
 
+input {
+  border: 0;
+  background-color: var(--c-white);
+  border-radius: 20px;
+  padding: 10px 50px;
+}
+
+.main {
+  padding: 40px;
+  display: grid;
+}
+
+.add-book {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.add-book-bto-wrapper {
+  align-self: flex-end;
+}
+
+button {
+  border: 0;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: var(--c-medium-brown);
+}
+
+.add-book-bto {
+  color: var(--c-white);
+}
+
+.input-wrapper > * {
+  width: 100%;
+}
+
+.input-wrapper .material-symbols-outlined {
+  position: absolute;
+  padding: 10px;
+  width: min-content;
+  color: grey;
+}
