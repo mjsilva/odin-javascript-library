@@ -19,8 +19,8 @@
   <body>
     <header></header>
     <section class="main">
-      <section class="add-book">
-        <h1>Add new book</h1>
+      <section class="add-book visible">
+        <h1>Add New Book</h1>
         <div class="input-wrapper title">
           <span class="material-symbols-outlined">title</span>
           <input type="text" id="title" name="title" placeholder="Title" />
@@ -46,12 +46,13 @@
           <button class="add-book-bto">Add Book</button>
         </div>
       </section>
+      <section class="list-books">list books</section>
     </section>
     <footer>
-      <nav>
-        <span class="material-symbols-outlined"> menu_book </span>
-        <span class="material-symbols-outlined active"> add_box </span>
-        <span class="material-symbols-outlined"> more_horiz </span>
+      <nav class="nav-action-wrapper">
+        <span class="material-symbols-outlined" data-view="list-books"> menu_book </span>
+        <span class="material-symbols-outlined active" data-view="add-book"> add_box </span>
+        <span class="material-symbols-outlined" data-view="other"> more_horiz </span>
       </nav>
     </footer>
   </body>
