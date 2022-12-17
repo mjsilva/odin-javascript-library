@@ -22,7 +22,7 @@ body {
   background-color: var(--c-medium-brown);
   font-family: "Montserrat", sans-serif;
   display: grid;
-  grid-template-rows: 50px 1fr 80px;
+  grid-template-rows: 50px calc(100dvh - 50px - 80px) 80px;
   grid-template-columns: 1fr;
   grid-template-areas:
     "header"
