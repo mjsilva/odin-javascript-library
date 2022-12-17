@@ -18,6 +18,7 @@ function App() {
   };
 }
 
+document.querySelector("body").style.height = `${window.innerHeight}px`;
 app = app || new App();
 
 // EVENT LISTENERS
