@@ -19,55 +19,67 @@
   <body>
     <header></header>
     <section class="main">
-      <section class="add-book">
+      <section class="add-book visible">
         <h1>Add New Book</h1>
         <div class="input-wrapper title">
           <span class="material-symbols-outlined">title</span>
           <input type="text" id="title" name="title" placeholder="Title" />
+          <div class="error-message"></div>
         </div>
         <div class="input-wrapper author">
           <span class="material-symbols-outlined"> person </span>
           <input type="text" id="author" name="author" placeholder="Author" />
+          <div class="error-message"></div>
         </div>
         <div class="input-wrapper pages">
           <span class="material-symbols-outlined"> auto_stories </span>
           <input type="text" id="pages" name="pages" placeholder="Pages" />
+          <div class="error-message"></div>
         </div>
         <div class="input-wrapper image-url">
           <span class="material-symbols-outlined"> add_a_photo </span>
           <input
             type="text"
-            id="image-url"
+            id="imageUrl"
             name="image-url"
             placeholder="Image Url"
           />
+          <div class="error-message"></div>
         </div>
         <div class="add-book-bto-wrapper">
           <button class="add-book-bto">Add Book</button>
         </div>
       </section>
-      <section class="list-books visible">
+      <section class="list-books">
         <h1>My Books</h1>
         <div class="books-list">
           <div class="book-record" data-id="1">
             <div class="image">
-              <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg"
-                   alt="">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg"
+                alt=""
+              />
             </div>
             <div class="title">Harry Potter and the Philosopher's Stone</div>
             <div class="author">J. K. Rowling</div>
             <div class="pages">814 pages</div>
-            <div class="actions"></div>
+            <div class="actions">
+              <span class="material-symbols-outlined"> delete </span>
+            </div>
           </div>
           <div class="book-record" data-id="2">
             <div class="image">
-              <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg"
-                   alt="">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg"
+                alt=""
+              />
             </div>
             <div class="title">Harry Potter and the Philosopher's Stone</div>
             <div class="author">J. K. Rowling</div>
             <div class="pages">814 pages</div>
-            <div class="actions"></div>
+            <div class="actions">
+              <span class="material-symbols-outlined"> delete </span>
+            </div>
           </div>
         </div>
       </section>
@@ -75,9 +87,12 @@
     </section>
     <footer>
       <nav class="nav-action-wrapper">
-        <span class="material-symbols-outlined" data-view="list-books">
-          menu_book
-        </span>
+        <div class="list-books-wrapper">
+          <span class="books-counter">0</span>
+          <span class="material-symbols-outlined" data-view="list-books">
+            menu_book
+          </span>
+        </div>
         <span class="material-symbols-outlined" data-view="add-book">
           add_box
         </span>
