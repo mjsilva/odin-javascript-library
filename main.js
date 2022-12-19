@@ -72,6 +72,10 @@ function Storage() {
   this.count = function () {
     return this.db.length;
   };
+
+  this.getAllRecords = () => {
+    return this.db;
+  };
 }
 
 function App() {
@@ -132,6 +136,29 @@ function App() {
     showView(viewName);
   };
 
+  this.updateBooksList = () => {
+    document.querySelector(".books-list").innerHTML = "";
+    getStorage()
+      .getAllRecords()
+      .forEach((record) => {
+        document.querySelector(".books-list").innerHTML +=
+            `<div class="book-record" data-id="${record.id}">
+                <div class="image">
+                  <img
+                    src="${record.book.imageUrl}"
+                    alt=""
+                  />
+                </div>
+                <div class="title">${record.book.title}</div>
+                <div class="author">${record.book.author}</div>
+                <div class="pages">${record.book.pages} pages</div>
+                <div class="actions">
+                  <span class="material-symbols-outlined" data-id="${record.id}"> delete </span>
+                </div>
+            </div>`
+      });
+  };
+
   this.addBook = () => {
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
@@ -147,6 +174,7 @@ function App() {
     getStorage().add(book);
     resetBookInputFields();
     updateBookCounter();
+    this.updateBooksList();
   };
 }
 
@@ -154,12 +182,14 @@ document.querySelector("body").style.height = `${window.innerHeight}px`;
 app = app || new App();
 
 // EVENT LISTENERS
-document.querySelectorAll(".nav-action-wrapper > span").forEach((el) => {
-  el.addEventListener("click", (event) => {
-    event.stopPropagation();
-    app.switchView(event.currentTarget.dataset.view);
+document
+  .querySelectorAll(".nav-action-wrapper .material-symbols-outlined")
+  .forEach((el) => {
+    el.addEventListener("click", (event) => {
+      event.stopPropagation();
+      app.switchView(event.currentTarget.dataset.view);
+    });
   });
-});
 
 document.querySelector(".add-book-bto").addEventListener("click", () => {
   app.addBook();

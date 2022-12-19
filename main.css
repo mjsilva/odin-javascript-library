@@ -86,7 +86,7 @@ footer nav .material-symbols-outlined:hover {
   font-size: 10px;
   top: -5px;
   right: -5px;
-
+  z-index: 10;
 }
 
 input {
