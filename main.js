@@ -127,7 +127,7 @@ function App() {
     });
   };
 
-  const updateBookCounter = () => {
+  this.updateBookCounter = () => {
     document.querySelector(".books-counter").innerHTML = getStorage().count();
   };
 
@@ -141,8 +141,9 @@ function App() {
     getStorage()
       .getAllRecords()
       .forEach((record) => {
-        document.querySelector(".books-list").innerHTML +=
-            `<div class="book-record" data-id="${record.id}">
+        document.querySelector(
+          ".books-list"
+        ).innerHTML += `<div class="book-record" data-id="${record.id}">
                 <div class="image">
                   <img
                     src="${record.book.imageUrl}"
@@ -153,9 +154,9 @@ function App() {
                 <div class="author">${record.book.author}</div>
                 <div class="pages">${record.book.pages} pages</div>
                 <div class="actions">
-                  <span class="material-symbols-outlined" data-id="${record.id}"> delete </span>
+                  <span class="material-symbols-outlined delete-book" data-id="${record.id}"> delete </span>
                 </div>
-            </div>`
+            </div>`;
       });
   };
 
@@ -173,13 +174,21 @@ function App() {
 
     getStorage().add(book);
     resetBookInputFields();
-    updateBookCounter();
+    this.updateBookCounter();
+    this.updateBooksList();
+  };
+
+  this.deleteBook = (id) => {
+    getStorage().remove(id);
+    this.updateBookCounter();
     this.updateBooksList();
   };
 }
 
 document.querySelector("body").style.height = `${window.innerHeight}px`;
 app = app || new App();
+app.updateBooksList();
+app.updateBookCounter();
 
 // EVENT LISTENERS
 document
@@ -193,4 +202,9 @@ document
 
 document.querySelector(".add-book-bto").addEventListener("click", () => {
   app.addBook();
+});
+
+document.querySelector(".books-list").addEventListener("click", (event) => {
+  const targetElement = event.currentTarget.closest(".delete-book");
+  app.deleteBook(targetElement.dataset.id);
 });
