@@ -5,8 +5,9 @@
   --c-medium-brown: #daaa63;
   --c-dark-brown: #2c1810;
   --c-white: #fff;
-  --c-grey: #fff;
+  --c-grey: #b0aaa7;
   --c-off-white: rgba(255, 255, 255, 0.62);
+  --c-medium-dark-brown: #3f302a;
 }
 
 .material-symbols-outlined {
@@ -16,6 +17,7 @@
 h1 {
   font-family: "Libre Caslon Text", serif;
   font-weight: normal;
+  color: var(--c-medium-dark-brown);
 }
 
 body {
@@ -28,6 +30,7 @@ body {
     "header"
     "main"
     "footer";
+  color: var(--c-medium-dark-brown);
 }
 
 header {
@@ -76,7 +79,6 @@ input {
 }
 
 .main {
-  padding: 40px;
   display: grid;
 }
 
@@ -92,6 +94,7 @@ input {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  padding: 20px;
 }
 
 .add-book-bto-wrapper {
@@ -118,4 +121,72 @@ button {
   padding: 10px;
   width: min-content;
   color: grey;
+}
+
+
+.books-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+
+.list-books > h1 {
+  margin-left: 30px;
+}
+
+.book-record {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "book-record-image book-record-title"
+    "book-record-image book-record-author"
+    "book-record-image book-record-pages"
+    "book-record-image book-record-actions";
+  grid-column-gap: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  color: var(--c-grey);
+
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+
+  box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+}
+
+.book-record > * {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.book-record .material-symbols-outlined {
+  font-size: 2rem;
+}
+
+.book-record .image {
+  grid-area: book-record-image;
+  box-shadow: 3px 3px 10px 0 rgb(0 0 0 / 25%);
+}
+
+.book-record .title {
+  grid-area: book-record-title;
+  font-family: "Libre Caslon Text", serif;
+  text-transform: capitalize;
+  color: var(--c-medium-dark-brown);
+}
+
+.book-record .author {
+  grid-area: book-record-author;
+}
+
+.book-record .pages {
+  grid-area: book-record-pages;
+}
+
+.book-record .actions {
+  grid-area: book-record-actions;
 }

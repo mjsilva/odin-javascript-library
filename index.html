@@ -19,7 +19,7 @@
   <body>
     <header></header>
     <section class="main">
-      <section class="add-book visible">
+      <section class="add-book">
         <h1>Add New Book</h1>
         <div class="input-wrapper title">
           <span class="material-symbols-outlined">title</span>
@@ -46,14 +46,44 @@
           <button class="add-book-bto">Add Book</button>
         </div>
       </section>
-      <section class="list-books">not implemented yet</section>
+      <section class="list-books visible">
+        <h1>My Books</h1>
+        <div class="books-list">
+          <div class="book-record" data-id="1">
+            <div class="image">
+              <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg"
+                   alt="">
+            </div>
+            <div class="title">Harry Potter and the Philosopher's Stone</div>
+            <div class="author">J. K. Rowling</div>
+            <div class="pages">814 pages</div>
+            <div class="actions"></div>
+          </div>
+          <div class="book-record" data-id="2">
+            <div class="image">
+              <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg"
+                   alt="">
+            </div>
+            <div class="title">Harry Potter and the Philosopher's Stone</div>
+            <div class="author">J. K. Rowling</div>
+            <div class="pages">814 pages</div>
+            <div class="actions"></div>
+          </div>
+        </div>
+      </section>
       <section class="other">not implemented yet</section>
     </section>
     <footer>
       <nav class="nav-action-wrapper">
-        <span class="material-symbols-outlined" data-view="list-books"> menu_book </span>
-        <span class="material-symbols-outlined active" data-view="add-book"> add_box </span>
-        <span class="material-symbols-outlined" data-view="other"> more_horiz </span>
+        <span class="material-symbols-outlined" data-view="list-books">
+          menu_book
+        </span>
+        <span class="material-symbols-outlined" data-view="add-book">
+          add_box
+        </span>
+        <span class="material-symbols-outlined" data-view="other">
+          more_horiz
+        </span>
       </nav>
     </footer>
   </body>
