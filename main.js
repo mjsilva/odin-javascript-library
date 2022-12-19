@@ -63,10 +63,12 @@ function Storage() {
 
   /**
    * Deletes book by id
-   * @param index {number}
+   * @param id {number}
    */
-  this.remove = function (index) {
-    // this.db[index] || delete this.db[index];
+  this.delete = function (id) {
+    this.db = this.db.filter((element) =>
+        element.id !== id
+    )
   };
 
   this.count = function () {
@@ -179,7 +181,7 @@ function App() {
   };
 
   this.deleteBook = (id) => {
-    getStorage().remove(id);
+    getStorage().delete(id);
     this.updateBookCounter();
     this.updateBooksList();
   };
@@ -204,7 +206,10 @@ document.querySelector(".add-book-bto").addEventListener("click", () => {
   app.addBook();
 });
 
-document.querySelector(".books-list").addEventListener("click", (event) => {
-  const targetElement = event.currentTarget.closest(".delete-book");
-  app.deleteBook(targetElement.dataset.id);
+document.querySelector(".main").addEventListener("click", (event) => {
+  const targetElement = event.target.closest(".delete-book");
+  if (!targetElement) {
+    return;
+  }
+  app.deleteBook(+targetElement.dataset.id);
 });
