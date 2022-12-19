@@ -1,6 +1,7 @@
 let app;
 
 /**
+ * Book
  *
  * @param title {string}
  * @param author {string}
@@ -26,9 +27,15 @@ function Record(id, book) {
   this.book = book;
 }
 
+/**
+ * Storage facilities
+ *
+ * @constructor
+ */
 function Storage() {
   this.lastId = 0;
-  // this.db = [];
+
+  // Adds random books for example purposes
   this.db = [
     new Record(
       1,
@@ -66,34 +73,57 @@ function Storage() {
    * @param id {number}
    */
   this.delete = function (id) {
-    this.db = this.db.filter((element) =>
-        element.id !== id
-    )
+    this.db = this.db.filter((element) => element.id !== id);
   };
 
+  /**
+   * Returns number of records
+   *
+   * @returns {number}
+   */
   this.count = function () {
     return this.db.length;
   };
 
+  /**
+   * Gets all records
+   *
+   * @returns {[Record,Record]|*}
+   */
   this.getAllRecords = () => {
     return this.db;
   };
 }
 
+/**
+ * Main App
+ *
+ * @constructor
+ */
 function App() {
   let storage = null;
+
+  /**
+   * Hides all views
+   */
   const hideAllViews = () => {
     [...document.querySelectorAll(".main section")].forEach((el) => {
       el.classList.remove("visible");
     });
   };
 
+  /**
+   * Show view based on view name
+   *
+   * @param viewName {string}
+   */
   const showView = (viewName) => {
     const el = document.querySelector(`.main section.${viewName}`);
     el.classList.add("visible");
   };
 
   /**
+   * Get storage, behaves like a singleton
    *
    * @returns {Storage}
    */
@@ -103,8 +133,11 @@ function App() {
   };
 
   /**
+   *  Validates books as input by user and display
+   *  appropriate errors when... appropriate
    *
    * @param book {Book}
+   * @return {boolean}
    */
   const validateBookDataAndDisplayErrors = (book) => {
     let hasNoErrors = true;
@@ -123,14 +156,23 @@ function App() {
     return hasNoErrors;
   };
 
+  /**
+   * Resets book add input fields
+   * to their original state
+   */
   const resetBookInputFields = () => {
     document.querySelectorAll(".input-wrapper input").forEach((element) => {
       element.value = "";
     });
   };
 
+  /**
+   * Updates book counter based on record
+   */
   this.updateBookCounter = () => {
-    document.querySelector(".books-counter").innerHTML = getStorage().count();
+    document.querySelector(".books-counter").innerHTML = getStorage()
+      .count()
+      .toFixed();
   };
 
   this.switchView = (viewName) => {
@@ -138,6 +180,9 @@ function App() {
     showView(viewName);
   };
 
+  /**
+   * Update HTML book list based on what's on storage
+   */
   this.updateBooksList = () => {
     document.querySelector(".books-list").innerHTML = "";
     getStorage()
@@ -162,6 +207,9 @@ function App() {
       });
   };
 
+  /**
+   * Adds new book
+   */
   this.addBook = () => {
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
@@ -180,6 +228,11 @@ function App() {
     this.updateBooksList();
   };
 
+  /**
+   * Deletes book based on its ID
+   *
+   * @param id {number}
+   */
   this.deleteBook = (id) => {
     getStorage().delete(id);
     this.updateBookCounter();
@@ -187,7 +240,6 @@ function App() {
   };
 }
 
-document.querySelector("body").style.height = `${window.innerHeight}px`;
 app = app || new App();
 app.updateBooksList();
 app.updateBookCounter();
