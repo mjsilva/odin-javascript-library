@@ -24,17 +24,35 @@
           <h1>Add New Book</h1>
           <div class="input-wrapper title">
             <span class="material-symbols-outlined">title</span>
-            <input type="text" id="title" name="title" placeholder="Title" />
+            <input
+              required
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+            />
             <div class="error-message"></div>
           </div>
           <div class="input-wrapper author">
             <span class="material-symbols-outlined"> person </span>
-            <input type="text" id="author" name="author" placeholder="Author" />
+            <input
+              required
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Author"
+            />
             <div class="error-message"></div>
           </div>
           <div class="input-wrapper pages">
             <span class="material-symbols-outlined"> auto_stories </span>
-            <input type="text" id="pages" name="pages" placeholder="Pages" />
+            <input
+              required
+              type="text"
+              id="pages"
+              name="pages"
+              placeholder="Pages"
+            />
             <div class="error-message"></div>
           </div>
           <div class="input-wrapper image-url">
@@ -44,7 +62,13 @@
               id="imageUrl"
               name="image-url"
               placeholder="Image Url"
+              required
             />
+            <div class="error-message"></div>
+          </div>
+          <div class="input-wrapper read">
+            <span>Read </span>
+            <input type="checkbox" id="read" name="read" />
             <div class="error-message"></div>
           </div>
           <div class="add-book-bto-wrapper">

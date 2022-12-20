@@ -7,13 +7,15 @@ let app;
  * @param author {string}
  * @param pages {number}
  * @param imageUrl {string}
+ * @param read {boolean}
  * @constructor
  */
-function Book(title, author, pages, imageUrl) {
+function Book(title, author, pages, imageUrl, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.imageUrl = imageUrl;
+  this.read = read;
 }
 
 /**
@@ -43,7 +45,8 @@ function Storage() {
         "Fifty Shades of Gray",
         "E. L. James",
         514,
-        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTRl34v2iRF1MQfzwDOuop_3akLq9EFutHbhXAra9Gs_UKK8M0o"
+        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTRl34v2iRF1MQfzwDOuop_3akLq9EFutHbhXAra9Gs_UKK8M0o",
+        true
       )
     ),
     new Record(
@@ -52,7 +55,38 @@ function Storage() {
         "Harry Potter and the Philosopher's Stone",
         "J. K. Rowling",
         812,
-        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRkWXbfQrO5oTm1I5izjeRTbQD-vKPnybT24S2kFw2eH8LyyCo5"
+        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRkWXbfQrO5oTm1I5izjeRTbQD-vKPnybT24S2kFw2eH8LyyCo5",
+        false
+      )
+    ),
+    new Record(
+      3,
+      new Book(
+        "Gangsta Rap Coloring Book",
+        "aye jay",
+        146,
+        "http://www.fastprint.co.uk/Assets/User/2074-gangsta-rap-coloring-book.jpg",
+        false
+      )
+    ),
+    new Record(
+      4,
+      new Book(
+        "Still Stripping After 25 Years",
+        "Elanor Burns",
+        169,
+        "http://www.fastprint.co.uk/Assets/User/2113-still-stripping-after-25-years.jpg",
+        true
+      )
+    ),
+    new Record(
+      5,
+      new Book(
+        "Eating People Is Wrong",
+        "Joe Hums",
+        567,
+        "http://www.fastprint.co.uk/Assets/User/2064-eating-people-is-wrong.jpg",
+        false
       )
     ),
   ];
@@ -89,9 +123,10 @@ function Storage() {
    * Gets all records
    *
    * @returns {[Record,Record]|*}
+   * @param {"asc"|"desc"} order
    */
-  this.getAllRecords = () => {
-    return this.db;
+  this.getAllRecords = (order = "asc") => {
+    return order === "asc" ? this.db : this.db.reverse();
   };
 }
 
@@ -141,9 +176,13 @@ function App() {
    */
   const validateBookDataAndDisplayErrors = (book) => {
     let hasNoErrors = true;
-    [...Object.getOwnPropertyNames(book)].forEach((elementName) => {
+    for (let elementName of Object.getOwnPropertyNames(book)) {
       document.querySelector(`#${elementName}`).classList.remove("error");
       document.querySelector(`#${elementName} ~ .error-message`).innerHTML = "";
+
+      if (elementName === "read") {
+        continue;
+      }
 
       if (!book[elementName]) {
         document.querySelector(`#${elementName}`).classList.add("error");
@@ -152,7 +191,7 @@ function App() {
         ).innerHTML = `You need to fill ${elementName}`;
         hasNoErrors = false;
       }
-    });
+    }
     return hasNoErrors;
   };
 
@@ -163,6 +202,7 @@ function App() {
   const resetBookInputFields = () => {
     document.querySelectorAll(".input-wrapper input").forEach((element) => {
       element.value = "";
+      element.checked = false;
     });
   };
 
@@ -186,7 +226,7 @@ function App() {
   this.updateBooksList = () => {
     document.querySelector(".books-list").innerHTML = "";
     getStorage()
-      .getAllRecords()
+      .getAllRecords("desc")
       .forEach((record) => {
         document.querySelector(
           ".books-list"
@@ -200,8 +240,15 @@ function App() {
                 <div class="title">${record.book.title}</div>
                 <div class="author">${record.book.author}</div>
                 <div class="pages">${record.book.pages} pages</div>
+                <div class="read" data-id="${
+                  record.id
+                }">Read: <input class="edit-read" type="checkbox" data-id="${record.id}" ${
+          record.book.read && "checked"
+        }></div>
                 <div class="actions">
-                  <span class="material-symbols-outlined delete-book" data-id="${record.id}"> delete </span>
+                  <span class="material-symbols-outlined delete-book" data-id="${
+                    record.id
+                  }"> delete </span>
                 </div>
             </div>`;
       });
@@ -215,8 +262,9 @@ function App() {
     const author = document.querySelector("#author").value;
     const pages = document.querySelector("#pages").value;
     const imageUrl = document.querySelector("#imageUrl").value;
+    const read = document.querySelector("#read").checked;
 
-    const book = new Book(title, author, pages, imageUrl);
+    const book = new Book(title, author, pages, imageUrl, read);
 
     if (!validateBookDataAndDisplayErrors(book)) {
       return;
@@ -224,8 +272,7 @@ function App() {
 
     getStorage().add(book);
     resetBookInputFields();
-    this.updateBookCounter();
-    this.updateBooksList();
+    this.refreshUI();
   };
 
   /**
@@ -235,14 +282,32 @@ function App() {
    */
   this.deleteBook = (id) => {
     getStorage().delete(id);
-    this.updateBookCounter();
-    this.updateBooksList();
+    this.refreshUI();
+  };
+
+  /**
+   * Toggles read property based on user input
+   *
+   * @param id {number}
+   * @param read {boolean}
+   */
+  this.editRead = (id, read) => {
+    for (let record of getStorage().db) {
+      if (record.id === id) {
+        record.book.read = read;
+        return;
+      }
+    }
+  };
+
+  this.refreshUI = () => {
+    app.updateBooksList();
+    app.updateBookCounter();
   };
 }
 
 app = app || new App();
-app.updateBooksList();
-app.updateBookCounter();
+app.refreshUI();
 
 // EVENT LISTENERS
 document
@@ -264,4 +329,12 @@ document.querySelector(".main").addEventListener("click", (event) => {
     return;
   }
   app.deleteBook(+targetElement.dataset.id);
+});
+
+document.querySelector(".main").addEventListener("click", (event) => {
+  const targetElement = event.target.closest(".edit-read");
+  if (!targetElement) {
+    return;
+  }
+  app.editRead(+targetElement.dataset.id, targetElement.checked);
 });
