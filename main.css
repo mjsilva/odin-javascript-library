@@ -110,6 +110,7 @@ input {
 
 .main {
   display: grid;
+  overflow: auto;
 }
 
 .main section {
@@ -148,6 +149,14 @@ button {
 
 .input-wrapper > * {
   width: 100%;
+}
+
+.input-wrapper.read {
+  padding-left: 10px;
+}
+
+.input-wrapper.read input {
+  width: auto;
 }
 
 .input-wrapper .material-symbols-outlined {
@@ -191,6 +200,7 @@ button {
     "book-record-image book-record-title"
     "book-record-image book-record-author"
     "book-record-image book-record-pages"
+    "book-record-image book-record-read"
     "book-record-image book-record-actions";
   grid-column-gap: 20px;
   font-family: "Montserrat", sans-serif;
